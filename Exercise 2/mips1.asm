@@ -17,7 +17,7 @@ main:
 	la $a0, prompt
 	syscall
 	
-# $0 is counting i
+# $t0 is counting i
 # t0 is result of shift left by 1 in decimal
 Loop_Out: sll $t0, $s0, 2
 	# In CPP, a[i] = a + i
