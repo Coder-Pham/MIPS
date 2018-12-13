@@ -1,7 +1,7 @@
 # QuickSort - ascending order
 .data
 nums:   .word 15
-elems:  .word 17, 24, 19, 21, 14, 16, 18, 12, 22, 23, 11, 4, 3, 14, 21
+elems:  .word 24 23 22 21 21 19 18 17 16 14 14 12 11 4 3
 space:  .asciiz " "
 
 .text
