@@ -1,7 +1,7 @@
 # Bubble sort - descending order
 .data
-nums:   .word 10
-elems:  .word 5, 2, 3, 4, 9, 12, 14, 20, 1, 1
+nums:   .word 15
+elems:  .word 17, 24, 19, 21, 14, 16, 18, 12, 22, 23, 11, 4, 3, 14, 21
 space:  .asciiz " "
 
 .text
