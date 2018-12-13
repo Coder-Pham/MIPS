@@ -1,7 +1,7 @@
 # QuickSort - ascending order
 .data
 nums:   .word 15
-elems:  .word 17, 24, 19, 21, 14, 16, 18, 12, 22, 23, 11, 4, 3, 14, 21
+elems:  .word 24 23 22 21 21 19 18 17 16 14 14 12 11 4 3
 space:  .asciiz " "
 
 .text
@@ -12,9 +12,17 @@ main:
     # Use stack to store HEAD - TAIL SUBARRAY
     addi $a0, $0, 0
     addi $a1, $s0, -1
+
+    # COUNT
+    addi $t9, $t9, 4
+
     jal quicksort   # Call quicksort
     # Print
     addi $s2, $0, 0
+
+    # COUNT
+    addi $t9, $t9, 2
+
     j Print
 
 quicksort:  
@@ -42,6 +50,9 @@ quicksort:
     add $t2, $t2, $s1
     lw $t2, 0($t2)
 
+    # COUNT
+    addi $t9, $t9, 17
+
     # While (i < j)
     i_j:bge $t0, $t1, recurse1
         # while (a[i] < mid)    i++
@@ -49,9 +60,17 @@ quicksort:
             sll $t3, $t0, 2
             add $t3, $t3, $s1
             lw $t3, 0($t3)
+
+            # COUNT
+            addi $t9, $t9, 4
+
             # a[i] < mid
             bge $t3, $t2, j_mid
             addi $t0, $t0, 1
+
+            # COUNT
+            addi $t9, $t9, 2
+
             j i_mid
 
         # While (a[j] > mid)    j--
@@ -59,9 +78,17 @@ quicksort:
             sll $t4, $t1, 2
             add $t4, $t4, $s1
             lw $t4, 0($t4)
+
+            # COUNT
+            addi $t9, $t9, 4
+
             # a[j] > mid
             ble $t4, $t2, swap 
             addi $t1, $t1, -1
+
+            # COUNT
+            addi $t9, $t9, 2
+
             j j_mid
 
         # Swap a[i] - a[j]
@@ -79,9 +106,15 @@ quicksort:
             # i++      j--
             addi $t0, $t0, 1
             addi $t1, $t1, -1
+
+            # COUNT
+            addi $t9, $t9, 10
     j i_j
 
 recurse1:
+    # COUNT 
+    addi $t9, $t9, 1
+
     # If head < j
     bge	$a0, $t1, recurse2	# if $a0 >= $t1 then recurse2
         move $a1, $t1
@@ -91,7 +124,13 @@ recurse1:
         lw $a1, 4($sp)
         lw $ra, 20($sp)
 
+    # COUNT
+    addi $t9, $t9, 5
+
 recurse2:
+    # COUNT 
+    addi $t9, $t9, 1
+
     # If i < tail
     bge $t0, $a1, Exit
         move $a0, $t0
@@ -101,11 +140,18 @@ recurse2:
         lw $a1, 4($sp)
         lw $ra, 20($sp)
 
+    # COUNT
+    addi $t9, $t9, 5
+
 Exit:
     lw $t0, 8($sp)
     lw $t1, 12($sp)
     lw $t2, 16($sp)
     addi $sp, $sp, 24
+
+    # COUNT
+    addi $t9, $t9, 5
+    
     jr	$ra				# jump to stack
 
 Print:  sll $t0, $s2, 2
@@ -118,6 +164,10 @@ Print:  sll $t0, $s2, 2
     la $a0, space
     syscall
     addi $s2, $s2, 1
+
+    # COUNT
+    addi $t9, $t9, 11
+
     beq $s2, 15, Exit_print
     j Print
 Exit_print:
