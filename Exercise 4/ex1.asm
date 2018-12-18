@@ -48,6 +48,6 @@ Loop_result:    sll $t0, $s2, 2
     syscall
     # Branch if count equals
     addi $s2, $s2, 1
-    beq $s2, 10, Exit_result
+    beq $s2, 15, Exit_result
     j Loop_result
 Exit_result:
