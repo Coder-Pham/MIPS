@@ -1,2 +1,5 @@
 # Build file
 .exe
+
+# Latex aux
+.synctex.gz
